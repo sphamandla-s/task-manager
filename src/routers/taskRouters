@@ -1,0 +1,45 @@
+const express = require("express");
+const taskRouter = express.Router();
+const path = require('path')
+const Task = require('../models/taskModels')
+
+
+taskRouter.get('/', (req, res)=>{
+    res.render('landing_page')
+});
+
+taskRouter.get('/tasks', async(req, res)=>{
+    const tasks = await Task.find({});
+    res.render('tasks', { tasks })
+});
+
+
+taskRouter.post('/tasks', async(req, res)=>{
+    const newTask = new Task(req.body)
+    await newTask.save()
+    res.redirect('/tasks')
+});
+
+taskRouter.get('/newtask', async(req, res)=>{
+    res.render('newtask')
+});
+
+taskRouter.get('/task/:id/edit', async(req, res)=>{
+    const {id} = req.params;
+    const task = await Task.findById(id)
+    res.render('edit', { task })
+});
+
+taskRouter.put('/tasks/:id', async(req, res)=>{
+    const { id } = req.params;
+    await Task.findByIdAndUpdate(id,req.body, { runValidators : true} )
+    res.redirect('/tasks')
+});
+
+taskRouter.delete('/tasks/:id', async(req, res)=>{
+    const { id } = req.params;
+    await Task.findByIdAndDelete(id)
+    res.redirect('/tasks')
+});
+
+module.exports = taskRouter;
