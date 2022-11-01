@@ -24,7 +24,7 @@ app.use(methodOverride('_method'))
 const taskRouters = require(path.join(__dirname, "src/routers/taskRouters"));
 
 app.get('/', taskRouters)
-//app.get('/tasks', taskRouters)
+app.get('/tasks', taskRouters)
 app.post('/tasks', taskRouters)
 app.get('/newtask', taskRouters)
 app.get('/task/:id/edit', taskRouters)
