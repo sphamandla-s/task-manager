@@ -4,8 +4,9 @@ const path = require('path')
 const Task = require('../models/taskModels')
 
 
-taskRouter.get('/', (req, res)=>{
-    res.render('landing_page')
+taskRouter.get('/', async(req, res)=>{
+    const tasks = await Task.find({});
+    res.render('tasks', { tasks })
 });
 
 taskRouter.get('/tasks', async(req, res)=>{

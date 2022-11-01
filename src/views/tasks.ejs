@@ -24,11 +24,9 @@
                           <h6> Due Date :<%= task.date %> </h6>
                           <h6> Due Time :<%= task.time %> </h6>
                           <a href="/task/<%= task.id %>/edit" class="btn btn-primary">Edit Task</a>
-                          <form action="/tasks/<%= task.id %>?_method=DELETE" method="post"></form>
-                         
-                         
-                          <a href="#" class="btn btn-danger"></a>
-                          <button type="submit">Delete Task</button>
+                          <form action="/tasks/<%= task.id %>?_method=DELETE" method="post">
+                            <button type="submit" class="btn btn-danger">Delete Task</button>
+                          </form>
                         </div>
                       </div>
                 <% } %>
